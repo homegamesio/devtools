@@ -1,6 +1,5 @@
 const { subtypes, unsquish } = require('squishjs');
 
-
 const svgText = (gameNode, container) => {
     const fill = gameNode.node.text.color;
     const align = gameNode.node.text.align;
@@ -94,9 +93,11 @@ const svgHelper = (gameNode, container) => {
 
 const layersToSvg = (squishedLayers, container) => {
     let svgString = `<svg height="${container.y}" width="${container.x}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">`;
-    squishedLayers.forEach(squishedNode => {
-        const node = unsquish(squishedNode);
-        svgString += svgHelper(node, container);
+    squishedLayers.forEach(squishedLayer => {
+        squishedLayer.forEach(squishedNode => {
+            const node = unsquish(squishedNode);
+            svgString += svgHelper(node, container);
+        });
     });
 
     svgString += `</svg>`
