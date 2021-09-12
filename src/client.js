@@ -1,7 +1,9 @@
 const layersToSvg = require('./svg');
 const widthForm = document.getElementById('width-px');
 const heightForm = document.getElementById('height-px');
-const dataForm = document.getElementById('data-form');
+const scaleXForm = document.getElementById('scale-x');
+const scaleYForm = document.getElementById('scale-y');
+const dataForm = document.getElementById('data');
 const svgContainer = document.getElementById('svg-container');
 
 const initialData = [
@@ -47,16 +49,23 @@ const initialData = [
 const initialWidth = 600;
 const initialHeight = 600;
 
+const initialScaleX = 1;
+const initialScaleY = 1;
+
 let width = initialWidth;
 let height = initialHeight;
+let scaleX = initialScaleX;
+let scaleY = initialScaleY;
 let data = initialData;
 
 widthForm.value = width;
 heightForm.value = height;
+scaleXForm.value = scaleX;
+scaleYForm.value = scaleY;
 dataForm.value = JSON.stringify(data);
 
 const updateSvg = () => {
-    const container = {x: width, y: height};
+    const container = {x: (width * scaleX), y: (height * scaleY)};
     const svgData = layersToSvg(data, container);
     svgContainer.innerHTML = svgData;
 };
@@ -65,10 +74,26 @@ updateSvg();
 
 widthForm.oninput = (e) => {
     width = e.target.value;
+    updateSvg();
 };
 
 heightForm.oninput = (e) => {
     height = e.target.value;
+    updateSvg();
 };
 
+scaleXForm.oninput = (e) => {
+    scaleX = e.target.value;
+    updateSvg();
+};
+
+scaleYForm.oninput = (e) => {
+    scaleY = e.target.value;
+    updateSvg();
+};
+
+dataForm.oninput = (e) => {
+    data = JSON.parse(e.target.value);
+    updateSvg();
+};
 
