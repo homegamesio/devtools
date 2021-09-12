@@ -25,7 +25,7 @@ widthForm.value = width;
 heightForm.value = height;
 scaleXForm.value = scaleX;
 scaleYForm.value = scaleY;
-dataForm.value = data;
+dataForm.value = JSON.stringify(JSON.parse(data), null, 2);
 
 const updateSvg = () => {
     const container = {x: (width * scaleX), y: (height * scaleY)};
