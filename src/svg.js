@@ -49,7 +49,7 @@ const svgLine = (gameNode, container) => {
         return [scaleX(coordPair[0], container.x), scaleY(coordPair[1], container.y)];
     });
 
-    return `<polyline points="${scaledCoords.join(' ')}" fill="none" stroke="${colorString}"`;
+    return `<polyline points="${scaledCoords.join(' ')}" stroke="${colorString}" />`;
 };
 
 const svgPolygon = (gameNode, container) => {
